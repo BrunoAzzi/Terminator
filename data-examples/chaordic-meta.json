@@ -1,0 +1,59 @@
+{
+  "product": {
+    "id": "398",
+    "url": "/vult-blush-compacto-45g---cor-03-4074/p",
+    "categories": [
+      {
+        "name": "Maquiagem",
+        "id": "Maquiagem"
+      },
+      {
+        "name": "Face",
+        "parents": [
+          "Maquiagem"
+        ],
+        "id": "Face"
+      },
+      {
+        "name": "Blush",
+        "parents": [
+          "Face"
+        ],
+        "id": "Blush"
+      }
+    ],
+    "skus": [
+      {
+        "sku": "365",
+        "images": {
+          "42x42": "/arquivos/ids/155697-42-42/4074_Ampliada.jpg",
+          "65x65": "/arquivos/ids/155697-65-65/4074_Ampliada.jpg",
+          "90x90": "/arquivos/ids/155697-90-90/4074_Ampliada.jpg",
+          "130x130": "/arquivos/ids/155697-130-130/4074_Ampliada.jpg",
+          "390x390": "/arquivos/ids/155697-390-390/4074_Ampliada.jpg",
+          "1000x1000": "/arquivos/ids/155697-1000-1000/4074_Ampliada.jpg"
+        },
+        "status": "available",
+        "price": 16.11,
+        "old_price": 17.9,
+        "ean_code": "7898417965370"
+      }
+    ],
+    "price": 16.11,
+    "old_price": 17.9,
+    "images": {
+      "42x42": "/arquivos/ids/155697-42-42/4074_Ampliada.jpg",
+      "65x65": "/arquivos/ids/155697-65-65/4074_Ampliada.jpg",
+      "90x90": "/arquivos/ids/155697-90-90/4074_Ampliada.jpg",
+      "130x130": "/arquivos/ids/155697-130-130/4074_Ampliada.jpg",
+      "390x390": "/arquivos/ids/155697-390-390/4074_Ampliada.jpg",
+      "1000x1000": "/arquivos/ids/155697-1000-1000/4074_Ampliada.jpg"
+    },
+    "status": "available",
+    "name": "Vult Blush Compacto 4,5g - Cor 03",
+    "details": {
+      "codigo_sku": "4074",
+      "brand": "Vult"
+    }
+  }
+}
