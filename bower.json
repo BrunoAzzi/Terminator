@@ -1,0 +1,26 @@
+{
+  "name": "Terminator",
+  "version": "0.0.1",
+  "homepage": "https://github.com/BrunoAzzi/Terminator",
+  "description": "Chaordic project for google spreadsheet integration",
+  "main": "index.html",
+  "keywords": [
+    "chaordic",
+    "google",
+    "spreadsheet"
+  ],
+  "authors": [
+    "bruno.azzi iurisan jose"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}
