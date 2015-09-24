@@ -1,26 +1,15 @@
 {
-  "name": "Terminator",
+  "name": "terminator-app",
+  "description": "A chaordic tool",
   "version": "0.0.1",
   "homepage": "https://github.com/BrunoAzzi/Terminator",
-  "description": "Chaordic project for google spreadsheet integration",
-  "main": "index.html",
-  "keywords": [
-    "chaordic",
-    "google",
-    "spreadsheet"
-  ],
-  "authors": [
-    "bruno.azzi iurisan jose"
-  ],
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "private": true,
   "dependencies": {
+    "angular": "~1.4.0",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "angular-route": "~1.4.0",
     "bootstrap": "~3.3.5"
   }
 }
