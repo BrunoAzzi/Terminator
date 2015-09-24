@@ -8,6 +8,7 @@ var URL_SELECT = "url-select";
 var CATEGORIES_SELECT = "categories-select";
 var PRICE_SELECT = "price-select";
 var VOLTAGEM_SELECT = "voltagem-select";
+var OLD_PRICE_SELECT = "old-price-select";
 
 var SELECT_EMPTY_VALUE = "Escolha uma coluna";
 
@@ -32,6 +33,7 @@ function listEvents(root) {
   document.getElementById("categories-label").addEventListener('click', function(){doSomething("categories-form-group", "categories-label");});
   document.getElementById("price-label").addEventListener('click', function(){doSomething("price-form-group", "price-label");});
   document.getElementById("voltagem-label").addEventListener('click', function(){doSomething("voltagem-form-group", "voltagem-label");});
+  document.getElementById("old-price-label").addEventListener('click', function(){doSomething("old-price-form-group", "old-price-label");});
 }
 
 //this code is not supported for IE < 10
@@ -55,6 +57,7 @@ function populateSelectors(html){
   populateSelect(CATEGORIES_SELECT, html);
   populateSelect(PRICE_SELECT, html);
   populateSelect(VOLTAGEM_SELECT, html);
+  populateSelect(OLD_PRICE_SELECT, html);
 }
 
 function populateSelect(name, html){
@@ -70,11 +73,13 @@ function generateJson(){
    if(!isHidden(CATEGORIES_SELECT)) if(!isSelectEmpty(CATEGORIES_SELECT)) map.set("product.categories",GOOGLE_PREFIX+document.getElementById(CATEGORIES_SELECT).value);
    if(!isHidden(PRICE_SELECT)) if(!isSelectEmpty(PRICE_SELECT)) map.set("product.price",GOOGLE_PREFIX+document.getElementById(PRICE_SELECT).value);
    if(!isHidden(VOLTAGEM_SELECT)) if(!isSelectEmpty(VOLTAGEM_SELECT)) map.set("product.specs.Voltagem",GOOGLE_PREFIX+document.getElementById(VOLTAGEM_SELECT).value);
+   if(!isHidden(OLD_PRICE_SELECT)) if(!isSelectEmpty(OLD_PRICE_SELECT)) map.set("product.old_price",GOOGLE_PREFIX+document.getElementById(OLD_PRICE_SELECT).value);
 
    populateId(searchData(0,map.get("product.id")));
    populateUrl(searchData(0,map.get("product.url")));
    populateCategories(searchData(0,map.get("product.categories")));
    populatePrice(searchData(0,map.get("product.price")));
+   populateOldPrice(searchData(0,map.get("product.old_price")));
    populateVoltagem(searchData(0,map.get("product.specs.Voltagem")));
 
    console.log(JSON.stringify(product));
@@ -112,6 +117,11 @@ function populatePrice(value){
   }
 }
 
+function populateOldPrice(value){
+  if(value != null && value != ""){
+    product.old_price = value;
+  }
+}
 function populateVoltagem(value){
   if(value != null && value != ""){
     product.specs = {};
