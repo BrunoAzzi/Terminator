@@ -26,6 +26,27 @@ function listEvents(root) {
   }
 
   populateSelectors(html);
+
+  document.getElementById("id-label").addEventListener('click', function(){doSomething("id-form-group", "id-label");});
+  document.getElementById("url-label").addEventListener('click', function(){doSomething("url-form-group", "url-label");});
+  document.getElementById("categories-label").addEventListener('click', function(){doSomething("categories-form-group", "categories-label");});
+  document.getElementById("price-label").addEventListener('click', function(){doSomething("price-form-group", "price-label");});
+  document.getElementById("voltagem-label").addEventListener('click', function(){doSomething("voltagem-form-group", "voltagem-label");});
+}
+
+//this code is not supported for IE < 10
+function doSomething(selectFormGroupId, labelId){
+  label = document.getElementById(labelId);
+  select = document.getElementById(selectFormGroupId);
+  if(label.classList.contains('label-default')){
+    label.classList.remove('label-default');
+    label.classList.add('label-primary');
+    select.classList.remove('hidden');
+  }else{
+    label.classList.remove('label-primary');
+    label.classList.add('label-default');
+    select.classList.add('hidden');
+  }
 }
 
 function populateSelectors(html){
@@ -44,11 +65,11 @@ function generateJson(){
   product = {};
   map.clear();
 
-   if(!isSelectEmpty(ID_SELECT)) map.set("product.id",GOOGLE_PREFIX+document.getElementById(ID_SELECT).value);
-   if(!isSelectEmpty(URL_SELECT)) map.set("product.url",GOOGLE_PREFIX+document.getElementById(URL_SELECT).value);
-   if(!isSelectEmpty(CATEGORIES_SELECT)) map.set("product.categories",GOOGLE_PREFIX+document.getElementById(CATEGORIES_SELECT).value);
-   if(!isSelectEmpty(PRICE_SELECT)) map.set("product.price",GOOGLE_PREFIX+document.getElementById(PRICE_SELECT).value);
-   if(!isSelectEmpty(VOLTAGEM_SELECT)) map.set("product.specs.Voltagem",GOOGLE_PREFIX+document.getElementById(VOLTAGEM_SELECT).value);
+   if(!isHidden(ID_SELECT)) if(!isSelectEmpty(ID_SELECT)) map.set("product.id",GOOGLE_PREFIX+document.getElementById(ID_SELECT).value);
+   if(!isHidden(URL_SELECT)) if(!isSelectEmpty(URL_SELECT)) map.set("product.url",GOOGLE_PREFIX+document.getElementById(URL_SELECT).value);
+   if(!isHidden(CATEGORIES_SELECT)) if(!isSelectEmpty(CATEGORIES_SELECT)) map.set("product.categories",GOOGLE_PREFIX+document.getElementById(CATEGORIES_SELECT).value);
+   if(!isHidden(PRICE_SELECT)) if(!isSelectEmpty(PRICE_SELECT)) map.set("product.price",GOOGLE_PREFIX+document.getElementById(PRICE_SELECT).value);
+   if(!isHidden(VOLTAGEM_SELECT)) if(!isSelectEmpty(VOLTAGEM_SELECT)) map.set("product.specs.Voltagem",GOOGLE_PREFIX+document.getElementById(VOLTAGEM_SELECT).value);
 
    populateId(searchData(0,map.get("product.id")));
    populateUrl(searchData(0,map.get("product.url")));
@@ -101,6 +122,10 @@ function populateVoltagem(value){
 function isSelectEmpty(selectId){
   if(document.getElementById(selectId).value == SELECT_EMPTY_VALUE) return true;
   return false;
+}
+
+function isHidden(selectId) {
+    return (document.getElementById(selectId).offsetParent === null);
 }
 
 function searchData(linha, coluna){
