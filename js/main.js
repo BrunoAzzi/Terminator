@@ -7,12 +7,20 @@ var ID_SELECT = "id-select";
 var URL_SELECT = "url-select";
 var CATEGORIES_SELECT = "categories-select";
 var PRICE_SELECT = "price-select";
+var VOLTAGEM_SELECT = "voltagem-select";
+
+var SELECT_EMPTY_VALUE = "Escolha uma coluna";
+
+var GOOGLE_PREFIX = "gsx$";
 
 function listEvents(root) {
   data = root.feed.entry || [];
 
+  //TODO revisar essa gambi
+  html.push('<option>',SELECT_EMPTY_VALUE,'</option>');
+
   for (var property in data[0]) {
-    if(property.indexOf("gsx$") > -1){
+    if(property.indexOf(GOOGLE_PREFIX) > -1){
         html.push('<option>', property.split("$", 2)[1], '</option>');
     }
   }
@@ -25,6 +33,7 @@ function populateSelectors(html){
   populateSelect(URL_SELECT, html);
   populateSelect(CATEGORIES_SELECT, html);
   populateSelect(PRICE_SELECT, html);
+  populateSelect(VOLTAGEM_SELECT, html);
 }
 
 function populateSelect(name, html){
@@ -32,18 +41,21 @@ function populateSelect(name, html){
 }
 
 function generateJson(){
-  //for( i = 0; i < data.length; i++){
-   map.set("product.id","gsx$"+document.getElementById("id-select").value);
-   map.set("product.url","gsx$"+document.getElementById("url-select").value);
-   map.set("product.categories","gsx$"+document.getElementById("categories-select").value);
-   map.set("product.price","gsx$"+document.getElementById("price-select").value);
+  product = {};
+  map.clear();
+
+   if(!isSelectEmpty(ID_SELECT)) map.set("product.id",GOOGLE_PREFIX+document.getElementById(ID_SELECT).value);
+   if(!isSelectEmpty(URL_SELECT)) map.set("product.url",GOOGLE_PREFIX+document.getElementById(URL_SELECT).value);
+   if(!isSelectEmpty(CATEGORIES_SELECT)) map.set("product.categories",GOOGLE_PREFIX+document.getElementById(CATEGORIES_SELECT).value);
+   if(!isSelectEmpty(PRICE_SELECT)) map.set("product.price",GOOGLE_PREFIX+document.getElementById(PRICE_SELECT).value);
+   if(!isSelectEmpty(VOLTAGEM_SELECT)) map.set("product.specs.Voltagem",GOOGLE_PREFIX+document.getElementById(VOLTAGEM_SELECT).value);
 
    populateId(searchData(0,map.get("product.id")));
    populateUrl(searchData(0,map.get("product.url")));
-   product.categories = searchData(0,map.get("product.categories")).split("-");
+   populateCategories(searchData(0,map.get("product.categories")));
    populatePrice(searchData(0,map.get("product.price")));
+   populateVoltagem(searchData(0,map.get("product.specs.Voltagem")));
 
- //}
    console.log(JSON.stringify(product));
 }
 
@@ -61,8 +73,15 @@ function populateUrl(value){
 
 function populateCategories(value){
   if(value != null && value != ""){
+    product.categories = [];
     categoryList = value.split(">");
-    //TODO implement
+    for(i=0;i<categoryList.length;i++){
+      product.categories[i] = {};
+      product.categories[i].name = categoryList[i];
+      product.categories[i].id = categoryList[i];
+      // TODO parents is actualy an array
+      if(i!=0){product.categories[i].parents = categoryList[i-1];}
+    }
   }
 }
 
@@ -70,6 +89,18 @@ function populatePrice(value){
   if(value != null && value != ""){
     product.price = value;
   }
+}
+
+function populateVoltagem(value){
+  if(value != null && value != ""){
+    product.specs = {};
+      product.specs.Voltagem = value.split(",");
+  }
+}
+
+function isSelectEmpty(selectId){
+  if(document.getElementById(selectId).value == SELECT_EMPTY_VALUE) return true;
+  return false;
 }
 
 function searchData(linha, coluna){
