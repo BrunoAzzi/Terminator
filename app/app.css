@@ -1,3 +1,20 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: transparent;
+}
+
+html {
+  background: url(images/fundo_hub-2051bfbfc040e7da28fb1a80ea3e9c79.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
  .label {
    display: inline-block;
    margin-bottom: 5px;
@@ -6,3 +23,31 @@
  .btn {
    margin-bottom: 10px;
  }
+
+#api-key-input label{
+  color: white;
+  padding: 6px 0px;
+}
+
+hr {
+  margin-bottom: 0px;
+  border: none;
+  border-bottom: rgb(153, 165, 170) dashed 1px;
+}
+
+.json-inspect {
+  padding: 20px;
+}
+
+#api-key {
+  width: 100%;
+}
+
+#json-inspect-right-panel {
+  height: 100%;
+  border-left: rgb(153, 165, 170) dashed 1px;
+}
+
+.panel {
+    height: 200px;
+}
