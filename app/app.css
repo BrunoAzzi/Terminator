@@ -57,3 +57,9 @@ hr {
   overflow: auto;
    white-space: pre;
 }
+
+.glyphicon{
+  color: #9d9d9d;
+  padding: 10px 0px;
+  font-size: 15px;
+}
