@@ -19,9 +19,9 @@
     <div ng-include="'partials/nav/nav.html'"></div>
 
     <div class="container">
-      <form id="api-key-input" class="col-md-12 form-inline">
+      <form id="api-key-input" class="col-md-12 form-inline" ng-controller="sheetsUrlController">
         <div class="form-group col-md-offset-3 col-md-6 text-left">
-          <input type="text" class="form-control" id="api-key" placeholder="Precisamos da url de publicação da sua planilha"/>
+          <input type="text" class="form-control" id="api-key" ng-model="sheetsUrl" placeholder="Precisamos da url de publicação da sua planilha"/>
         </div>
       </form>
     </div>
@@ -33,6 +33,9 @@
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
 
     <script src="components/version/version.js"></script>
     <script src="components/version/version-directive.js"></script>
@@ -40,9 +43,10 @@
 
     <script src="app.js"></script>
     <script src="partials/jsonInspector/jsonInspector.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js">
+    <script src="partials/jsonInspector/jsonTextInspector/jsonTextInspector.js"></script>
+    <script src="partials/jsonInspector/jsonMapInspector/jsonMapInspector.js"></script>
+    <script src="partials/jsonInspector/jsonTableInspector/jsonTableInspector.js"></script>
 
     </script>
-    <!-- <script src="https://spreadsheets.google.com/feeds/list/1RXqSvRBTZe2zvYSwCUM_Xj_NtVruqztEA6AMvKFGKDA/od6/public/values?alt=json-in-script&amp;callback=listEvents"></script> -->
   </body>
 </html>

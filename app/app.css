@@ -36,7 +36,12 @@ hr {
 }
 
 .json-inspect {
+  height: 100%;
   padding: 20px;
+}
+
+.panel{
+  padding: 10px 10px;
 }
 
 #api-key {
@@ -48,6 +53,7 @@ hr {
   border-left: rgb(153, 165, 170) dashed 1px;
 }
 
-.panel {
-    height: 200px;
+#json-panel{
+  overflow: auto;
+   white-space: pre;
 }
