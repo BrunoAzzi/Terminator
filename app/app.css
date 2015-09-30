@@ -1,3 +1,20 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: transparent;
+}
+
+html {
+  background: url(images/fundo_hub-2051bfbfc040e7da28fb1a80ea3e9c79.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
  .label {
    display: inline-block;
    margin-bottom: 5px;
@@ -6,3 +23,53 @@
  .btn {
    margin-bottom: 10px;
  }
+
+#api-key-input label{
+  color: white;
+  padding: 6px 0px;
+}
+
+hr {
+  margin-bottom: 0px;
+  border: none;
+  border-bottom: rgb(153, 165, 170) dashed 1px;
+}
+
+.json-inspect {
+  height: 100%;
+  padding: 20px;
+}
+
+.panel{
+  padding: 10px 10px;
+}
+
+#api-key {
+  width: 100%;
+}
+
+#api-send-button {
+  margin: 0;
+}
+
+#json-inspect-right-panel {
+  height: 100%;
+  border-left: rgb(153, 165, 170) dashed 1px;
+}
+
+#json-panel{
+  overflow: auto;
+   white-space: pre;
+}
+.glyphicon {
+  color: white;
+}
+
+.glyphicon-question-sign{
+  padding: 10px 0px;
+  font-size: 15px;
+}
+
+.glyphicon-ok {
+  color: green;
+}
