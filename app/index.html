@@ -19,17 +19,26 @@
     <div ng-include="'partials/nav/nav.html'"></div>
 
     <div class="container">
-      <form id="api-key-input" class="col-md-12 form-inline" ng-controller="sheetsUrlController">
-        <div class="form-group col-md-offset-3 col-md-6 text-left">
-          <input type="text" class="form-control" id="api-key" ng-model="sheetsUrl" placeholder="Cole aqui a url de publicação da sua planilha"/>
+      <form novalidate id="api-key-input" class="col-md-12 form-inline" ng-controller="sheetsUrlController">
+        <div class="form-group col-md-12 row">
+            <div class="col-md-9 col-xs-9">
+              <input id="api-key" ng-disabled="apiKeyDisable" class="form-control" type="text" ng-model="googleSheetsUrl" placeholder="Cole aqui a url de publicação da sua planilha"/>
+            </div>
+            <div class="col-md-3 col-xs-3">
+              <input id="api-send-button" ng-show="apiKeySendButtonVisible" type="button" class="btn btn-success" value="send" ng-click="saveUrl()">
+            </div>
+            <div ng-show="googleSheetsUrlValidSignVisible" class="col-md-3 col-xs-3">
+              <a class="btn btn-success disabled"><span class="glyphicon glyphicon-ok"></span></a>
+              <a class="btn btn-primary" ng-click="editUrl()" ><span class="glyphicon glyphicon-edit"></span></a>
+            </div>
         </div>
       </form>
     </div>
 
     <hr class="col-md-12"/>
 
-    <div ng-include="'partials/jsonInspector/jsonInspector.html'"></div>
-    <div ng-include="'partials/jsonInspector/jsonInspector.html'"></div>
+    <div ng-if="devToolsVisible" ng-include="'partials/jsonInspector/jsonInspector.html'"></div>
+    <div ng-if="devToolsVisible" ng-include="'partials/jsonInspector/jsonInspector.html'"></div>
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>

@@ -48,6 +48,10 @@ hr {
   width: 100%;
 }
 
+#api-send-button {
+  margin: 0;
+}
+
 #json-inspect-right-panel {
   height: 100%;
   border-left: rgb(153, 165, 170) dashed 1px;
@@ -57,9 +61,15 @@ hr {
   overflow: auto;
    white-space: pre;
 }
+.glyphicon {
+  color: white;
+}
 
-.glyphicon{
-  color: #9d9d9d;
+.glyphicon-question-sign{
   padding: 10px 0px;
   font-size: 15px;
+}
+
+.glyphicon-ok {
+  color: green;
 }
