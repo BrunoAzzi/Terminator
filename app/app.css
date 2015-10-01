@@ -38,6 +38,8 @@ hr {
 .json-inspect {
   height: 100%;
   padding: 20px;
+  border: rgb(153, 165, 170) dashed 1px;
+  border-top: none;
 }
 
 .panel{
@@ -52,9 +54,9 @@ hr {
   margin: 0;
 }
 
-#json-inspect-right-panel {
+#json-inspect-panel {
   height: 100%;
-  border-left: rgb(153, 165, 170) dashed 1px;
+  border: rgb(153, 165, 170) dashed 1px;
 }
 
 #json-panel{

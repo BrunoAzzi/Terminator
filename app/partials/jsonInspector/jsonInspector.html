@@ -8,6 +8,8 @@
         <label class="btn btn-default" ng-model="radioModel" btn-radio="'text'">Text</label>
     </div>
 
+    <a href="#" class="btn btn-warning pull-right">Download</a>
+
     <div ng-switch="radioModel">
       <div ng-switch-when="table"><div class="" ng-include="'partials/jsonInspector/jsonTableInspector/jsonTableInspector.html'"></div></div>
       <div ng-switch-when="map"><div ng-include="'partials/jsonInspector/jsonMapInspector/jsonMapInspector.html'"></div></div>

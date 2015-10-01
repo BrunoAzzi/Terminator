@@ -25,6 +25,7 @@ angular.module('terminator', [
   this.EAN_CODE = "ean_code";
   this.MAP = new Map();
 
+  this.categoryParentsSeparator = "=";
   this.googleSheetsUrl = "";
   this.product = {};
 }).factory('GoogleSheetsDataService', ['$http', '$q', function ($http, $q) {
@@ -51,18 +52,22 @@ angular.module('terminator', [
   $rootScope.devToolsVisible = false;
 
     $scope.saveUrl = function () {
-      if(isGoogleSheetsUrlValid()){
+      if(isGoogleSheetsUrlValid($scope.googleSheetsUrl)){
         var key = $scope.googleSheetsUrl.split("/d/")[1].split("/")[0];
-        var url = "https://spreadsheets.google.com/feeds/list/"+key+"/od6/public/values?alt=json&callback=JSON_CALLBACK"
-        ConstantService.googleSheetsUrl = url;
-        console.log(url);
+        ConstantService.googleSheetsUrl = "https://spreadsheets.google.com/feeds/list/"+key+"/od6/public/values?alt=json&callback=JSON_CALLBACK"
 
         GoogleSheetsDataService.getGoogleSheetsData(ConstantService.googleSheetsUrl).then(function(data){
+          //TODO improve here
           makeProductJson(data.feed.entry || [], ConstantService.MAP);
+          makeDataTableJson(data.feed.entry || []);
+          enableDevView();
+        },function(data){
+          console.log("rest error");
         });
-        enableDevView();
+
       }else{
         //TODO alerts message in case of validations fails
+        console.log("url invalida");
       }
 
     }
@@ -89,15 +94,25 @@ angular.module('terminator', [
       $rootScope.devToolsVisible = true;
     }
 
-    function isGoogleSheetsUrlValid(){
-      //TODO implement validations here
-      if($scope.googleSheetsUrl != null || $scope.googleSheetsUrl != ""){
-        return true;
+    function makeDataTableJson(entries){
+      for(var i=0;i < entries.lenght;i++){
+        if(indexOf(ConstantService.GOOGLE_PREFIX) != -1)
+        ConstantService.tableData[i] = newLine;
       }
+      ConstantService.tableData
+    }
+
+    function isGoogleSheetsUrlValid(url){
+      //TODO implement validations here
+      if(url != null || url != ""){
+        if(url.indexOf("/d/") != -1){
+          return true;
+        }
+      }
+      return false;
     }
 
     function makeProductJson(entries,map){
-
       map.set("product.id",ConstantService.GOOGLE_PREFIX+ConstantService.ID);
       map.set("product.name",ConstantService.GOOGLE_PREFIX+ConstantService.NAME);
       map.set("product.description",ConstantService.GOOGLE_PREFIX+ConstantService.DESCRIPTION);
@@ -171,31 +186,37 @@ angular.module('terminator', [
       if(value != null && value != ""){
         ConstantService.product.categories = [];
         var categoryList = value.split(">");
-        for(var i=0;i<categoryList.length;i++){
-          ConstantService.product.categories[i] = {};
-          ConstantService.product.categories[i].name = categoryList[i];
-          ConstantService.product.categories[i].id = categoryList[i];
+        for(var linha = 0; linha <categoryList.length; linha++){
+          ConstantService.product.categories[linha] = {};
+          ConstantService.product.categories[linha].name = categoryList[linha];
+          ConstantService.product.categories[linha].id = categoryList[linha];
           // TODO parents is actualy an array
-          if(i!=0){ConstantService.product.categories[i].parents = categoryList[i-1];}
+          if(linha!=0){
+            var categoryListParents = categoryList[linha].split(ConstantService.categoryParentsSeparator);
+            ConstantService.product.categories[linha].parents = [];
+            for(var iterador = 0; iterador < categoryListParents.length; iterador++){
+              ConstantService.product.categories[linha].parents[iterador] = categoryListParents[iterador];
+            }
+          }
         }
       }
     }
 
     function populatePrice(value){
       if(value != null && value != ""){
-        ConstantService.product.price = value;
+        ConstantService.product.price = parseFloat(value);
       }
     }
 
     function populateOldPrice(value){
       if(value != null && value != ""){
-        ConstantService.product.old_price = value;
+        ConstantService.product.old_price = parseFloat(value);
       }
     }
 
     function populateBasePrice(value){
       if(value != null && value != ""){
-        ConstantService.product.base_price = value;
+        ConstantService.product.base_price = parseFloat(value);
       }
     }
 
@@ -212,8 +233,8 @@ angular.module('terminator', [
     }
 
     function populateStock(value){
-      if(value != null && value != ""){
-        ConstantService.product.stock = value;
+      if(value != null && value != "" && Number.isInteger(parseInt(value))){
+        ConstantService.product.stock = parseInt(value);
       }
     }
 
