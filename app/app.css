@@ -50,9 +50,9 @@ hr {
   width: 100%;
 }
 
-#api-send-button {
+/*#api-send-button {
   margin: 0;
-}
+}*/
 
 #json-inspect-panel {
   height: 100%;

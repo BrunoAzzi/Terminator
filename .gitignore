@@ -3,6 +3,7 @@ logs/*
 node_modules/
 tmp
 .idea
+*.log
 
 ### Bower ###
 bower_components
